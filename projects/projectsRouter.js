@@ -1,13 +1,12 @@
 const express = require('express');
-const actionDb = require('./data/helpers/actionModel');
+const projectDb = require('../data/helpers/projectModel');
 const router = express.Router();
-
 
 //get
 router.get('/', async (req, res) => {
   try {
-    const actions = await actionDb.get()
-    res.status(200).json(actions)
+    const projects = await projectDb.get()
+    res.status(200).json(projects)
   }
   catch{
     res.status(500).json({ error: "error, can't get anything"})
@@ -15,10 +14,10 @@ router.get('/', async (req, res) => {
 });
 
 //post
-router.post('/:id', async (req, res) => {
-  const newPost = { ...req.body, project_id: req.params.id}
+router.post('/', async (req, res) => {
+  const newPost = { ...req.body, id: req.params.id}
     try{
-    const success = await actionDb.insert(newPost)
+    const success = await projectDb.insert(newPost)
     res.status(201).json(success)
   }
   catch{
@@ -28,10 +27,9 @@ router.post('/:id', async (req, res) => {
 
 //put
 router.put('/:id', async (req, res) => {
-
   try {
-    await actionDb.update(req.params.id, { ...req.body, id: req.params.id })
-    const newResult = await actionDb.getById(req.params.id)
+    await projectDb.update(req.params.id, { ...req.body, id: req.params.id })
+    const newResult = await projectDb.getById(req.params.id)
     res.status(200).json(newResult)
   }
   catch {
@@ -41,9 +39,8 @@ router.put('/:id', async (req, res) => {
 
 //delete
 router.delete('/:id', async (req, res) => {
-
   try {
-    const result = await actionDb.remove(req.params.id)
+    const result = await projectDb.remove(req.params.id)
     res.status(200).json({ status: `User Id: ${result} has been successfully deleted`})
   }
   catch {
