@@ -1,55 +1,62 @@
-const express = require('express');
-const actionDb = require('../data/helpers/actionModel');
+const express = require("express");
+const Actions = require("../data/helpers/actionModel");
 const router = express.Router();
 
-
 //get
-router.get('/', async (req, res) => {
-  try {
-    const actions = await actionDb.get()
-    res.status(200).json(actions)
-  }
-  catch{
-    res.status(500).json({ error: "error, can't get anything"})
-  }
+router.get("/", (req, res) => {
+  Actions.get()
+    .then((result) => {
+      if (result) {
+        res.status(200).json(result);
+      } else {
+        res.status(404).json({ message: "actions not found" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "error, can't get anything" });
+    });
 });
 
 //post
-router.post('/:id', async (req, res) => {
-  const newPost = { ...req.body, project_id: req.params.id}
-    try{
-    const success = await actionDb.insert(newPost)
-    res.status(201).json(success)
-  }
-  catch{
-    res.status(500).json({ error: "no data found"})
-  }
+router.post("/:id", (req, res) => {
+  Actions.insert(req.body)
+    .then((result) => {
+      if (result) {
+        res.status(201).json(result);
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "no data found" });
+    });
 });
 
 //put
-router.put('/:id', async (req, res) => {
+router.put("/:id", (req, res) => {
+  Actions.update(req.params.id, req.body)
+    .then((result) => {
+      if (result) {
+        res.status(200).json(newResult);
+      }
+    })
 
-  try {
-    await actionDb.update(req.params.id, { ...req.body, id: req.params.id })
-    const newResult = await actionDb.getById(req.params.id)
-    res.status(200).json(newResult)
-  }
-  catch {
-    res.status(500).json({ error: "500 Error, you fucked up"})
-  }
+    .catch((err) => {
+      res.status(500).json({ message: "500 Error" });
+    });
 });
 
 //delete
-router.delete('/:id', async (req, res) => {
-
-  try {
-    const result = await actionDb.remove(req.params.id)
-    res.status(200).json({ status: `User Id: ${result} has been successfully deleted`})
-  }
-  catch {
-    res.status(500).json({ error: "500 Error, can't delete shit..."})
-  }
+router.delete("/:id", (req, res) => {
+  Actions.remove(req.params.id)
+    .then((result) => {
+      if (result) {
+        res
+          .status(200)
+          .json({ status: `User Id: ${result} has been successfully deleted` });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "500 Error, can't delete " });
+    });
 });
-
 
 module.exports = router;
