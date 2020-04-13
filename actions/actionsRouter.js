@@ -42,6 +42,7 @@ router.put("/:id", (req, res) => {
     .catch((err) => {
       res.status(500).json({ message: "500 Error" });
     });
+    
 });
 
 //delete
@@ -52,6 +53,8 @@ router.delete("/:id", (req, res) => {
         res
           .status(200)
           .json({ status: `User Id: ${result} has been successfully deleted` });
+      }else{
+        res.status(404).json({message : "item not found"})
       }
     })
     .catch((err) => {
