@@ -26,7 +26,8 @@
     "helmet": "^3.22.0",
     "knex": "^0.20.13",
     "nodemon": "^2.0.3",
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^4.1.1",
+    "validation-middleware": "^2.0.0"
   },
   "devDependencies": {
     "knex-cleaner": "^1.3.0"

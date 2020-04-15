@@ -44,6 +44,13 @@ The two parts of express learned  the two arguments passed by expree to a route 
 
 - [ x] Describe Middleware?
 Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware. We can think of middleware as array of functions that get executed in the order they are introduced into the server code.
+Middleware functions can perform the following tasks:
+
+-Execute any code.
+-Make changes to the request and the response objects.
+-End the request-response cycle.
+-Call the next middleware in the stack.
+
 
 - [ x] Describe a Resource?
 
