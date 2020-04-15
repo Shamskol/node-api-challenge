@@ -19,9 +19,25 @@ router.get('/',  (req, res) => {
   });
 });
 
+
 // router.get("/:id", validateId, (req,res) => {
 //   res.status(200).json(req.data);
 // });
+
+router.get("/:id/actions", validateId, (req, res) => {
+	Projects.get()
+	.then((result) => {
+		if (result) {
+			res.status(200).json(result);
+		} else {
+			res.status(404).json({message:"projects not found"});
+		}
+		})
+		.catch(error => {
+
+			res.status(500).json({ message: "error, can't get anything"})
+		  });
+		});
 
 
 //post
