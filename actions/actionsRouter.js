@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 });
 
 //post
-router.post("/:id", validateBody, validateProjectId, (req, res) => {
+router.post("/", validateBody,  (req, res) => {
   Actions.insert(req.body)
     .then(result => {
       if (result) {
