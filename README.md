@@ -39,8 +39,12 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
 - [ x] Mention two parts of Express that you learned about this week.
-The two parts of express learned  the two arguments passed by expree to a route handler function:
-(i)an object that represents the request (ii) an object that represents the response.
+The two parts of express learnt are :
+(i) Express routing : this allows for maping of incoming requests to appropriate request handler dependingon the URL and HTTP method used. Routing allows for application modularity
+
+
+(ii) Express middleware : this is used to add features to express. Middleware functions can get the request and response objects, operate on them and trigger some action.
+
 
 - [ x] Describe Middleware?
 Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware. We can think of middleware as array of functions that get executed in the order they are introduced into the server code.
